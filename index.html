@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LessonMate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>LessonMate</h2>
+    <button onclick="showSection('addSubject')">Add Subject</button>
+    <button onclick="showSection('addLesson')">Add Lesson</button>
+    <button onclick="showSection('viewSubjectsLessons')">View Subjects & Lessons</button>
+    <button onclick="showSection('quiz')">Generate Quiz</button>
+    <button onclick="showSection('result')">Result</button>
+</div>
+
+<div class="main">
+
+    <div class="section" id="addSubject">
+        <h2>Add Subject</h2>
+        <input type="text" id="subjectName" placeholder="Enter subject name">
+        <button onclick="addSubject()">Add Subject</button>
+        <div id="subjectList"></div>
+    </div>
+
+
+    <div class="section hidden" id="addLesson">
+        <h2>Add Lesson</h2>
+        <select id="subjectSelect"></select>
+        <input type="text" id="lessonTitle" placeholder="Lesson Title">
+        <textarea id="lessonContent" rows="8" placeholder="Lesson Content"></textarea>
+        <button onclick="addLesson()">Add Lesson</button>
+    </div>
+
+
+    <div class="section hidden" id="viewSubjectsLessons">
+        <h2>Subjects & Lessons</h2>
+        <div id="subjectsLessonsList"></div>
+    </div>
+
+
+    <div class="section hidden" id="viewLessonContent">
+        <h2 id="lessonTitleContent">Lesson Title</h2>
+        <textarea id="lessonContentEditor" rows="10"></textarea>
+        <button onclick="saveLessonContent()">Save</button>
+        <button onclick="markLessonCompleted()">Mark Completed</button>
+        <button onclick="showSection('viewSubjectsLessons')">Back</button>
+    </div>
+
+
+    <div class="section hidden" id="quiz">
+        <h2>Generate Quiz</h2>
+
+        <label>Select Subject:</label>
+        <select id="quizSubjectSelect" onchange="updateLessonSelect()"></select>
+
+        <label>Select Lesson:</label>
+        <select id="lessonSelect"></select>
+
+        <label>Select Quiz Type(s):</label>
+        <div id="quizTypeContainer">
+            <label><input type="checkbox" value="identification"> Identification</label>
+            <label><input type="checkbox" value="multipleChoice"> Multiple Choice</label>
+            <label><input type="checkbox" value="trueFalse"> True or False</label>
+            <label><input type="checkbox" value="fillInTheBlank"> Fill-in-the-Blank</label>
+        </div>
+
+        <button onclick="generateQuiz()">Start Quiz</button>
+
+
+        <div id="takeQuiz" class="hidden">
+            <h3>Quiz</h3>
+            <div id="quizTimer">5:00</div>
+            <div id="quizContent"></div>
+            <button onclick="submitQuiz()">Submit</button>
+            <button id="submitCorrectionsBtn" class="hidden" onclick="submitCorrections()">Submit Corrections</button>
+            <button id="viewResultBtn" class="hidden" onclick="showResult()">View Result</button>
+        </div>
+
+
+        <div id="quizResult" class="hidden">
+            <h3 id="scoreText"></h3>
+            <button onclick="retakeQuiz()">Retake Quiz</button>
+            <button onclick="showCorrectAnswers()">Show Correct Answers</button>
+        </div>
+    </div>
+
+
+    <div class="section hidden" id="result">
+        <h2>Quiz Result</h2>
+        <div id="resultContent">
+            <p id="resultScore"></p>
+            <div id="correctAnswersList"></div>
+            <button onclick="retakeQuiz()">Retake Quiz</button>
+            <button onclick="showSection('viewSubjectsLessons')">Back to Subjects</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
